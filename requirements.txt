@@ -14,6 +14,7 @@ django-six==1.0.4
 djangorestframework==3.9.1
 entrypoints==0.3
 flake8==3.7.5
+gunicorn==19.9.0
 idna==2.8
 isort==4.3.4
 lazy-object-proxy==1.3.1
@@ -22,7 +23,9 @@ oauthlib==3.0.1
 pep8==1.7.1
 PyArabic==0.6.5
 pycodestyle==2.5.0
+pydocstyle==3.0.0
 pyflakes==2.1.0
+pylama==7.6.6
 pylint==2.2.2
 python3-openid==3.1.0
 pytz==2018.9
@@ -30,6 +33,8 @@ requests==2.21.0
 requests-oauthlib==1.2.0
 screen==1.0.1
 six==1.12.0
+snowballstemmer==1.2.1
 urllib3==1.24.1
+whitenoise==4.1.2
 wrapt==1.11.1
 xlwt==1.3.0

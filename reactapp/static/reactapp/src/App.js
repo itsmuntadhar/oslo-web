@@ -80,10 +80,12 @@ class App extends Component {
     login = e => {
         e.preventDefault();
         const form = e.target;
-        let url =
-            "http://" +
-            window.location.hostname.split(":")[0] +
-            ":6543/rest-auth/login/"; // ~~should~~ must be changed
+        // let url =
+        //     "http://" +
+        //     window.location.hostname.split(":")[0] +
+        //     ":6543/rest-auth/login/"; // ~~should~~ must be changed
+
+        let url = `https://${window.location.hostname}/rest-auth/login/`;
         axios({
             method: "post",
             url: url,
@@ -108,10 +110,12 @@ class App extends Component {
     register = e => {
         e.preventDefault();
         const form = e.target;
-        let url =
-            "http://" +
-            window.location.hostname.split(":")[0] +
-            ":6543/rest-auth/registration/"; // ~~should~~ must be changed
+        // let url =
+        //     "http://" +
+        //     window.location.hostname.split(":")[0] +
+        //     ":6543/rest-auth/registration/"; // ~~should~~ must be changed
+
+        let url = `https://${window.location.hostname}/rest-auth/registration/`;
         axios({
             method: "post",
             url: url,
@@ -143,10 +147,12 @@ class App extends Component {
     };
 
     logout = () => {
-        let url =
-            "http://" +
-            window.location.hostname.split(":")[0] +
-            ":6543/rest-auth/logout/"; // ~~should~~ must be changed
+        // let url =
+        //     "http://" +
+        //     window.location.hostname.split(":")[0] +
+        //     ":6543/rest-auth/logout/"; // ~~should~~ must be changed
+
+        let url = `https://${window.location.hostname}/api/words/`;
         axios({
             method: "post",
             url: url,
@@ -169,10 +175,11 @@ class App extends Component {
         e.preventDefault();
         const form = e.target;
         this.setState(state => ({ addWordResponse: "working on it" }));
-        let url =
-            "http://" +
-            window.location.hostname.split(":")[0] +
-            ":6543/api/words/"; // ~~should~~ must be changed
+        // let url =
+        //     "http://" +
+        //     window.location.hostname.split(":")[0] +
+        //     ":6543/api/words/"; // ~~should~~ must be changed
+        let url = `https://${window.location.hostname}/api/words/`;
         let headers = {
             "Content-Type": "application/json",
             Authorization: `Token ${this.state.key}`,

@@ -9,7 +9,7 @@ class Word(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, null=False)
 
     # the actual word :/
-    word = models.CharField(max_length=16, null=False)
+    word = models.CharField(max_length=16, null=False, unique=True)
 
     # level of severity
     severity = models.CharField(

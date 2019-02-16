@@ -25,7 +25,7 @@ SECRET_KEY = 'z=led*f-*yc%f93aia63d!!%zbhso=&!cs8$$4o$zma^agx!#l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 SITE_ID = 1
 
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth.registration',
     'rest_framework.authtoken',
     'corsheaders',
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,6 +63,11 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:5000',
+    '127.0.0.1:5000'
+)
 
 ROOT_URLCONF = 'oslo.urls'
 
@@ -117,7 +123,6 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
     ),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -140,14 +145,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'reactapp', 'static'),
+    os.path.join(BASE_DIR, 'reactapp', 'static', 'reactapp'),
+    os.path.join(os.path.join(BASE_DIR, 'reactapp',
+                              'static', 'reactapp'), 'build', 'static')
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

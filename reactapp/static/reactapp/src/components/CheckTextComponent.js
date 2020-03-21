@@ -37,11 +37,26 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
                             <Form.Label>your text</Form.Label>
                             <Form.Control as="textarea" rows="5" />
                         </Form.Group>
-                        <Form.Group controlId="force-spaces">
+                        <Form.Group controlId="sev-level">
+                            <Form.Label>Min. Severity Level</Form.Label>
+                            <Form.Control as="select">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </Form.Control>
+                        </Form.Group>
+                        <Form.Group>
                             <Form.Check
+                                id="leading-space"
+                                inline
                                 type="checkbox"
-                                label="there must be spaces around the word(s)"
-                                defaultChecked="true"
+                                label="there must be leading space"
+                            />
+                            <Form.Check
+                                id="trailing-space"
+                                inline
+                                type="checkbox"
+                                label="there must be a trailing space"
                             />
                         </Form.Group>
                         <Button variant="primary" type="submit">
@@ -74,8 +89,10 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
             method: "post",
             url: url,
             data: {
+                severity: form.elements["sev-level"].value,
                 text: form.elements["text"].value,
-                force_spaces: form.elements["force-spaces"].checked
+                leading_space: form.elements["leading-space"].checked,
+                trailing_space: form.elements["trailing-space"].checked
             },
             config: { headers: { "Content-Type": "application/json" } }
         })

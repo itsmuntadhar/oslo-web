@@ -61,7 +61,8 @@ class FilterViewSet(views.APIView):
 
         sev = request.data.get('severity', 1)
         sev = sev if sev in (0, 1, 2) else 1
-        force_space_around = request.data.get('force_space_around', 1) == 1
+        leading_space = request.data.get('leading_space', 0) == 1
+        trailing_space = request.data.get('trailing_space', 0) == 1
         query_filter = Q()
         while sev < 3:
             query_filter = query_filter | Q(severity=str(sev))
@@ -72,10 +73,18 @@ class FilterViewSet(views.APIView):
         og_text = fix_arabic(og_text)
         censored_text = og_text
         text_to_be_searched = og_text
+        censored_text_last_index = len(og_text) - 1
         for word in words:
             w = word.word.upper()
-            w = f' {w} ' if force_space_around else w
             if w in text_to_be_searched:
+                index = censored_text.index(w)
+                if leading_space:
+                    if index > 0 and censored_text[index - 1] != ' ':
+                        continue
+                if trailing_space:
+                    print(censored_text_last_index)
+                    if index + len(w) <= censored_text_last_index and censored_text[index + len(w)] != ' ':
+                        continue
                 words_found.append(w)
                 censored_text = censored_text.replace(
                     w, ''.join(['*' for i in range(len(w))]))

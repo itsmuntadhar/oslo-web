@@ -15,6 +15,11 @@ export class AboutComponent extends Component {
                     open-source can be found on{" "}
                     <a href="https://github.com/sparkist97/oslo-web">GitHub</a>
                 </h5>
+                <br />
+                <h5>
+                    you can participate by either making pull request to improve
+                    the code or creating an account to submit words
+                </h5>
             </div>
         );
     }

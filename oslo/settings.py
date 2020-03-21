@@ -168,11 +168,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'reactapp', 'static', 'reactapp'),
-    os.path.join(os.path.join(BASE_DIR, 'reactapp',
-                              'static', 'reactapp'), 'build', 'static')
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'reactapp', 'static', 'reactapp'),
+#     os.path.join(os.path.join(BASE_DIR, 'reactapp',
+#                               'static', 'reactapp'), 'build', 'static')
+# )
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

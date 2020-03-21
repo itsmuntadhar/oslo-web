@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from rest_framework import routers
 from filter import views as fv
+from reactapp import views as rv
 
 router = routers.DefaultRouter()
 router.register(r'users', fv.UserViewSet, basename='users')
@@ -15,5 +16,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
-    re_path(r'^(?:.*)\/?', include('reactapp.urls')),
+    re_path(r'^(?!.*(api|admin|rest-auth)).*$', rv.index),
 ]

@@ -7,30 +7,33 @@ class NavBarComponent extends Component {
             <Nav.Link key="0" href="/">
                 home
             </Nav.Link>,
+            <Nav.Link key="1" href="/about">
+                about
+            </Nav.Link>
         ];
 
         var key = localStorage.getItem("key");
-        if (key !== undefined && key != "undefined" && key != null) {
+        if (key !== undefined && key !== "undefined" && key != null) {
             links.push(
-                <Nav.Link key="1" href="/addword">
+                <Nav.Link key="2" href="/addword">
                     new word
-                </Nav.Link>,
+                </Nav.Link>
             );
             links.push(
-                <Nav.Link key="2" href="/logout">
+                <Nav.Link key="3" href="/logout">
                     logout
-                </Nav.Link>,
+                </Nav.Link>
             );
         } else {
             links.push(
-                <Nav.Link key="3" href="/login">
+                <Nav.Link key="4" href="/login">
                     login
-                </Nav.Link>,
+                </Nav.Link>
             );
             links.push(
-                <Nav.Link key="4" href="/register">
+                <Nav.Link key="5" href="/register">
                     register
-                </Nav.Link>,
+                </Nav.Link>
             );
         }
         return (

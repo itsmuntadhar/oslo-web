@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
+import GridLoader from "react-spinners/GridLoader";
+import { Form, Button } from "react-bootstrap";
 
 export class CheckTextComponent extends Component {
     constructor() {
         super();
 
-        this.state = { testresults: { censored_text: "", count: 0 } };
+        this.state = {
+            testresults: { censored_text: "", count: 0 },
+            loading: false,
+            force_spaces: true
+        };
         this.testText = this.testText.bind(this);
     }
     render() {
@@ -26,7 +32,23 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
                 </div>
                 <div style={{ marginTop: "2em" }}>
                     <h4>test the api</h4>
-                    <form id="frmTest" onSubmit={this.testText}>
+                    <Form onSubmit={this.testText}>
+                        <Form.Group controlId="text">
+                            <Form.Label>your text</Form.Label>
+                            <Form.Control as="textarea" rows="5" />
+                        </Form.Group>
+                        <Form.Group controlId="force-spaces">
+                            <Form.Check
+                                type="checkbox"
+                                label="there must be spaces around the word(s)"
+                                defaultChecked="true"
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Submit
+                        </Button>
+                    </Form>
+                    {/* <form id="frmTest" onSubmit={this.testText}>
                         <div className="form-group">
                             <label for="text">your text</label>
                             <textarea
@@ -37,10 +59,25 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
                                 form="frmTest"
                             />
                         </div>
+                        <div className="form-group">
+                            <label for="force-space">
+                                there must be spaces around the word(s)
+                            </label>
+                            <input
+                                id="force-space"
+                                type="checkbox"
+                                className="form-control"
+                                checked={this.state.force_spaces}
+                                form="frmTest"
+                            />
+                        </div>
                         <button type="submit" className="btn btn-primary">
                             Submit
                         </button>
-                    </form>
+                    </form> */}
+                    <div style={{ marginTop: "2em" }}>
+                        <GridLoader loading={this.state.loading} margin="2" />
+                    </div>
                 </div>
                 <div style={{ marginTop: "2em" }}>
                     {/* <h3>text scan results</h3> */}
@@ -57,31 +94,34 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
 
     testText(e) {
         e.preventDefault();
+        this.setState({ loading: true });
+        var self = this;
         const form = e.target;
-        let url =
-            "http://" +
-            window.location.hostname.split(":")[0] +
-            ":6543/api/filter/"; // ~~should~~ must be changed to ../api/filter
+        let url = "http://127.0.0.1:7788/api/filter/"; //`${window.location.origin}/api/filter/`;
         axios({
             method: "post",
             url: url,
             data: {
                 text: form.elements["text"].value,
+                force_spaces: form.elements["force-spaces"].checked
             },
-            config: { headers: { "Content-Type": "application/json" } },
+            config: { headers: { "Content-Type": "application/json" } }
         })
             .then(response => {
                 //handle success
                 this.setState({
                     testresults: {
                         censored_text: response.data.censored_text,
-                        count: response.data.count,
-                    },
+                        count: response.data.count
+                    }
                 });
             })
             .catch(function(response) {
                 //handle error
                 alert(response);
+            })
+            .then(function() {
+                self.setState({ loading: false });
             });
     }
 }

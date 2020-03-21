@@ -1,5 +1,6 @@
 {
-    "python.linting.pylintEnabled": false,
-    "python.linting.pep8Enabled": true,
+    "python.pythonPath": "C:\\Users\\spark\\venvs\\oslo\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": true,
+    "python.linting.pycodestyleEnabled": false,
     "python.linting.enabled": true
 }

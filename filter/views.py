@@ -28,6 +28,31 @@ class WordViewSet(viewsets.ModelViewSet):
     serializer_class = WordSerializer
     permission_classes = (IsStaffPermission,)
 
+    def list(self, request):
+        """
+        list words
+        """
+        offset = int(request.GET.get('offset', 0))
+        limit = int(request.GET.get('limit', 25))
+        exact_sev = int(request.GET.get('exact_sev', 1)) == 1
+        sev = int(request.GET.get('severity', 1))
+
+        if offset < 0:
+            return Response(data="offset cannot be less than zero!", status=400)
+        if 1 > limit > 50:
+            return Response(data="limit must be between 1 and 50", status=400)
+        if 0 > sev > 2:
+            return Response(data="severity must be between 0 and 2", status=400)
+        query_filter = Q(severity=str(sev))
+        if not exact_sev:
+            while sev < 3:
+                query_filter = query_filter | Q(severity=str(sev))
+                sev += 1
+        words = Word.objects.filter(query_filter)
+        words = words[offset:offset+limit]
+        words = WordSerializer(instance=words, many=True).data
+        return Response(data=words, status=200, content_type='application/json')
+
     def create(self, request):
         if 'word' not in request.data or 'severity' not in request.data:
             return Response({'details': 'incomplete data'}, status=400)

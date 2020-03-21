@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ['SECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DEBUG', 0)) == 1
+DEBUG = True  # int(os.environ.get('DEBUG', 0)) == 1
 
 ALLOWED_HOSTS = ['*']
 
@@ -139,6 +139,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
     ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
 }
 
 

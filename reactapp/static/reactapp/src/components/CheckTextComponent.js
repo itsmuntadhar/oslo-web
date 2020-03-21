@@ -40,9 +40,9 @@ PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8v
                         <Form.Group controlId="sev-level">
                             <Form.Label>Min. Severity Level</Form.Label>
                             <Form.Control as="select">
+                                <option>0</option>
                                 <option>1</option>
                                 <option>2</option>
-                                <option>3</option>
                             </Form.Control>
                         </Form.Group>
                         <Form.Group>

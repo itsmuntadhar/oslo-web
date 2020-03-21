@@ -74,7 +74,7 @@ ROOT_URLCONF = 'oslo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'reactapp')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -170,13 +170,12 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_URL = '/static/'
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), )
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_URL = '/static/'
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'reactapp', 'static', 'reactapp'),
-#     os.path.join(os.path.join(BASE_DIR, 'reactapp',
-#                               'static', 'reactapp'), 'build', 'static')
-# )
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'reactapp', 'static',
+                 'reactapp', 'build', 'static'),
+)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# print(BASE_DIR)
